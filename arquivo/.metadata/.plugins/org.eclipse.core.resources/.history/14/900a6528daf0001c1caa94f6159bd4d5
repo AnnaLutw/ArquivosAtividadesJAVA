@@ -1,0 +1,30 @@
+package arquivosLista;
+
+import java.io.*;
+import java.util.Scanner;
+
+public class atividade9 {
+
+	public static void main(String[] args) {
+		try {
+			Scanner ent = new Scanner(System.in);
+			FileWriter arq = new FileWriter("C:\\temp\\ativi9.txt");
+			int totalAlu, dados;
+			System.out.println("Digite a quantidade de alunos");
+			totalAlu = ent.nextInt();
+			
+			
+			for(int i=0;i<totalAlu;i++) {
+				System.out.println("Digite sua matricula e seu telefone");
+				dados = ent.nextInt();
+				arq.write(ent.nextLine());
+			}
+			
+			
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

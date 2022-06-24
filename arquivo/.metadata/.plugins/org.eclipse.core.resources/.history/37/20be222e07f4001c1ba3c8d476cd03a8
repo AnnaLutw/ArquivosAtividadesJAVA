@@ -1,0 +1,140 @@
+package arquivosLista;
+
+import java.io.*;
+import java.util.Scanner;
+
+public class atividade8 {
+
+	public static double fat() {
+		File arq = new File("C:\\temp\\exer8.txt");
+		double valo = 0;
+		try {
+			int som = 0, res = 0;
+			String valor;
+			Scanner ent = new Scanner(arq);
+			while (ent.hasNextLine()) {
+				valor = ent.nextLine();
+				if (valor.contains("Valor")) {
+					String[] part = valor.split(" ");
+					String val = part[1];
+					som = Integer.parseInt(val);
+					res += som;
+				}
+			}
+
+			valo = res * 0.33;
+			valo *= 12;
+			ent.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Inválido");
+			e.printStackTrace();
+		}
+
+		try {
+			FileWriter resultado = new FileWriter("C://arquivos/resultado.txt");
+			resultado.write("O valor de aluguel anual é: " + valo + "\n");
+			resultado.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return valo;
+	}
+
+	public static double juros() {
+		File arq = new File("C://arquivos/exer8.txt");
+		double valo = 0, juros;
+		try {
+			int som = 0, res = 0;
+			String valor;
+			Scanner ent = new Scanner(arq);
+			while (ent.hasNextLine()) {
+				valor = ent.nextLine();
+				if (valor.contains("Valor")) {
+					String[] part = valor.split(" ");
+					String val = part[1];
+					som = Integer.parseInt(val);
+					res += som;
+				}
+			}
+
+			valo = res * 0.1;
+			juros = valo * 0.2;
+			valo *= juros;
+			ent.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Inválido");
+			e.printStackTrace();
+		}
+		
+		try {
+			FileWriter resultado = new FileWriter("C://arquivos/resultado.txt",true);
+			resultado.write("O valor de atrasos mensais é: " + valo + "\n");
+			resultado.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return valo;
+	}
+
+	public static double man() {
+		File arq = new File("C://arquivos/exer8.txt");
+		double cont = 0;
+		try {
+			String str;
+			Scanner ent = new Scanner(arq);
+			while (ent.hasNextLine()) {
+				str = ent.nextLine();
+				if (str.contains("Carro")) {
+					cont++;
+				}
+			}
+			cont *= 600;
+			cont *= 0.02;
+			ent.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Inválido");
+			e.printStackTrace();
+		}
+		
+		try {
+			FileWriter resultado = new FileWriter("C://arquivos/resultado.txt",true);
+			resultado.write("O valor de atrasos mensais é: " + cont + "\n");
+			resultado.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return cont;
+	}
+
+	public static void main(String[] args) {
+		Scanner ent = new Scanner(System.in);
+		// Random rn = new Random();
+		try {
+			int qt, vl, j = 1;
+			FileWriter arqes = new FileWriter("C://arquivos/Exer8.txt");
+			System.out.println("Digite a quantidade de carros:");
+			qt = ent.nextInt();
+			for (int i = 0; i < qt; i++) {
+				System.out.println("Digite o valor de aluguel do carro");
+				vl = ent.nextInt();
+				arqes.write("Carro " + j + "\n");
+				arqes.write("Valor " + vl + "\n" + "\n");
+
+				j++;
+			}
+			arqes.close();
+		} catch (IOException e) {
+			System.out.println("Inválido.");
+		}
+		System.out.printf("O valor das vendas anual é: %.2f", fat());
+		System.out.println();
+		System.out.printf("O valor recebido dos atrasos mensais é: %.2f", juros());
+		System.out.println();
+		System.out.printf("O valor de manutenção anual é de: %.2f", man());
+
+		ent.close();
+	}
+}
